@@ -38,13 +38,16 @@ int main() {
 
 int checkValidPass(char *ps) {
     int len = strlen(ps);
-    if (len != 5) return 0;
+    if (len < 5 || len > 8) return 0;
+    if (isdigit(ps[0])) return 0;
 
-    int digitCount = 0;
+    int upperCount = 0, digitCount = 0;
     for (int i = 0; i < len; i++) {
+        if (isupper(ps[i])) upperCount++;
         if (isdigit(ps[i])) digitCount++;
     }
-    if (digitCount < 1) return 0;
+    if (upperCount < 2) return 0;
+    if (digitCount < 2) return 0;
 
     return 1;
 }
